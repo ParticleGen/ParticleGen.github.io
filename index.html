@@ -91,7 +91,7 @@
           </div>
           <button class="video-carousel-btn video-carousel-next" aria-label="Next video">&#10095;</button>
         </div>
-        <div class="video-carousel-dots" id="video-dots"></div>
+
       </div>
     </div>
   </div>
@@ -205,7 +205,6 @@
   var VIDEO_BASE = './static/videos/';
 
   var track = document.getElementById('video-track');
-  var dotsContainer = document.getElementById('video-dots');
   var prevBtn = document.querySelector('.video-carousel-prev');
   var nextBtn = document.querySelector('.video-carousel-next');
   var current = 0;
@@ -228,38 +227,12 @@
     track.innerHTML = html;
   }
 
-  var DOTS_SHOWN = 10;
-
-  function buildDots() {
-    dotsContainer.innerHTML = '';
-    var start = Math.max(0, Math.min(current - Math.floor(DOTS_SHOWN / 2), total - DOTS_SHOWN));
-    var end = Math.min(start + DOTS_SHOWN, total);
-    for (var i = start; i < end; i++) {
-      var dot = document.createElement('button');
-      dot.className = 'video-carousel-dot' + (i === current ? ' active' : '');
-      dot.setAttribute('aria-label', 'Go to video ' + (i + 1));
-      dot.dataset.index = i;
-      dot.addEventListener('click', function () {
-        goTo(parseInt(this.dataset.index, 10));
-      });
-      dotsContainer.appendChild(dot);
-    }
-  }
-
   function goTo(index) {
     if (index < 0) index = total - 1;
     if (index >= total) index = 0;
     current = index;
     track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    updateDots();
     pauseAllExceptCurrent();
-  }
-
-  function updateDots() {
-    var dots = dotsContainer.querySelectorAll('.video-carousel-dot');
-    dots.forEach(function (d, i) {
-      d.classList.toggle('active', i === current);
-    });
   }
 
   function pauseAllExceptCurrent() {
@@ -277,7 +250,6 @@
   nextBtn.addEventListener('click', function () { goTo(current + 1); });
 
   buildSlides();
-  buildDots();
 })();
 </script>
 
