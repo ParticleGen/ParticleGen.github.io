@@ -1,0 +1,1 @@
+A colorful firework effect. Each time, 5 glittering particles shoot upward. After rising, they explode midair, releasing a burst of droplet-shaped bright spots that form a circular shape. Each particle has a random color, creating a vibrant, glowing effect.

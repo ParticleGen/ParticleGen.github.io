@@ -1,0 +1,1 @@
+This effect is a two-stage burst. A small white projectile rises first, then bursts into a dense sphere of tiny glittering yellow particles and tiny glittering orange-red particles. The sphere expands outward, slows down, and hangs in the air. After that, the cluster continues to disperse outward, softens, and fades away.

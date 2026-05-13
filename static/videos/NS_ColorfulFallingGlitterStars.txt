@@ -1,0 +1,1 @@
+Generate a particle effect where stars rotate and drift down within a square boundary. Each star has a different color, colorful and glittering. Each star gradually fades out at the end of its life.

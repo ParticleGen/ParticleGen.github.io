@@ -1,0 +1,1 @@
+An orange light blob is thrown upwards. When it drops onto the ground, many smaller light blobs blast outward from the center, forming a hemi-sphere and leaving bright orange trails as they fall in arcing paths. As they descend, these trailing blobs fade away completely.

@@ -1,0 +1,1 @@
+Green and blue circular particles spawn over a large area on the ground, floating upward with random disturbances. Both blue and green appear in varying shades. The particles have random initial velocity when they spawn on the ground.

@@ -1,0 +1,1 @@
+Firework effect: each time, randomly emit 1 to 3 particles upward in a cone shape. Then each particle bursts outward in all directions into a circular shape, leaving a sparkling trail.

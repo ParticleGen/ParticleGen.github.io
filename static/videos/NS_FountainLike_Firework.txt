@@ -1,0 +1,1 @@
+This is a fountain-like firework. Slightly gleaming colorful blob particles are sprayed upward in a wide-angle cone-shaped area and fall down under gravity. The particle colors change and fade out with time.

@@ -1,0 +1,1 @@
+This is a fountain-type firework. Colorful and bright particles are sprayed upward in a cone-shaped area and fall down under gravity.

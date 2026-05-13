@@ -1,0 +1,1 @@
+This is a fountain-like firework. Glittering green blob particles are sprayed upward in a cone-shaped area with trail and fall down under gravity. The particles turn into glittering blue when it drops.

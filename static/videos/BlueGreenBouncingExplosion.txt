@@ -1,0 +1,1 @@
+The explosion ejects blue and green particles, which bounce multiple times after colliding with the ground. Both blue and green appear in varying shades.

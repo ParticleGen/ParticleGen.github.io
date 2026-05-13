@@ -1,0 +1,1 @@
+A fountain-like orange firework effect, with bright particles shooting upward from the center in a cone shape, then affected by gravity and colliding with the ground, producing sparks at the point of impact.
