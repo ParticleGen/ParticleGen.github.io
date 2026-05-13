@@ -1,14 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="ParticleGen: a multi-agent system for text-driven editable particle effects generation.">
-  <meta name="keywords" content="particle effects, multi-agent system, UE5 Niagara, text-driven generation">
+  <meta
+    name="description"
+    content="ParticleGen: a multi-agent system for text-driven editable particle effects generation."
+  >
+  <meta
+    name="keywords"
+    content="particle effects, multi-agent system, UE5 Niagara, text-driven generation"
+  >
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ParticleGen: A Multi-Agent System for Particle Effects Generation</title>
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -21,7 +27,6 @@
       <a class="navbar-item" href="#video">Video</a>
       <a class="navbar-item" href="#pipeline">Pipeline</a>
       <a class="navbar-item" href="#results">Results</a>
-      <a class="navbar-item" href="#code">Code</a>
       <a class="navbar-item" href="#bibtex">BibTeX</a>
     </div>
   </div>
@@ -35,19 +40,20 @@
           <div class="text-color-gradient title is-1 publication-title">
             <span class="dnerf">ParticleGen</span>
           </div>
+
           <h1 class="title is-2 publication-title">
             A Multi-Agent System for<br>Particle Effects Generation
           </h1>
+
           <div class="is-size-5 publication-authors">
-            <span class="author-block">Temporary Project Page</span>
+            <span class="author-block">temp project page</span>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
-              <span class="link-block"><span class="external-link button is-normal is-rounded btn-paper disabled"><i class="fa-solid fa-file-pdf btn-icon"></i><span>Paper</span></span></span>
-              <span class="link-block"><span class="external-link button is-normal is-rounded btn-supp disabled"><i class="fa-solid fa-paperclip btn-icon"></i><span>Supp</span></span></span>
-              <span class="link-block"><span class="external-link button is-normal is-rounded btn-video disabled"><i class="fa-solid fa-play btn-icon"></i><span>Video</span></span></span>
-              <span class="link-block"><a href="#code" class="external-link button is-normal is-rounded btn-code"><i class="fa-solid fa-code btn-icon"></i><span>Code</span></a></span>
+              <span class="link-block">
+                <span class="external-link button is-normal is-rounded is-dark disabled">Code is coming soon</span>
+              </span>
             </div>
           </div>
         </div>
@@ -64,6 +70,30 @@
   </div>
 </section>
 
+<section
+  class="hero is-light is-small video-showcase"
+  aria-label="Generated particle effect videos"
+>
+  <div class="hero-body">
+    <div class="container">
+      <div class="video-showcase-heading">
+        <h2 class="title is-3">Generated Effects Showcase</h2>
+      </div>
+
+      <div class="video-showcase-rail" aria-label="Featured particle effects">
+        <div class="video-showcase-track" data-showcase-rail="0"></div>
+      </div>
+
+      <div
+        class="video-showcase-rail video-showcase-rail-alt"
+        aria-label="Additional particle effects"
+      >
+        <div class="video-showcase-track" data-showcase-rail="1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="abstract">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -71,40 +101,49 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Particle systems are widely used in digital entertainment to create dynamic scene elements and visual effects. However, authoring high-quality particle effects remains labor-intensive and demands specialized expertise, requiring practitioners to navigate complex procedural rules and high-dimensional parameter spaces. Recent large language models (LLMs) enable users to specify particle effects through natural language, yet reliably translating high-level creative intent into executable procedural logic and low-level parameters remains difficult. In this work, we present a multi-agent framework for the from-scratch synthesis of structured and editable particle systems from natural language descriptions. Given a text prompt, our framework first generates an initial particle configuration through a decoupled planning and parameterization pipeline, and then iteratively improves the result based on rendered feedback. To support precise and targeted adjustments, we further introduce a diagnostic mechanism that links observed visual artifacts to their underlying procedural causes. We validate our approach in Unreal Engine 5's Niagara system across a diverse set of scenarios, including elemental spells, dynamic natural phenomena, and fireworks. Quantitative and qualitative evaluations show that our method achieves high semantic fidelity and visual quality. By directly synthesizing structured particle simulation logic, our framework reduces the technical barrier to particle effect authoring and improves the efficiency of creative iteration.
+            Particle systems are widely used in digital entertainment to create dynamic scene elements and visual
+            effects. However, authoring high-quality particle effects remains labor-intensive and demands specialized
+            expertise, requiring practitioners to navigate complex procedural rules and high-dimensional parameter
+            spaces. Recent large language models (LLMs) enable users to specify particle effects through natural
+            language, yet reliably translating high-level creative intent into executable procedural logic and low-level
+            parameters remains difficult. In this work, we present a multi-agent framework for the from-scratch synthesis
+            of structured and editable particle systems from natural language descriptions. Given a text prompt, our
+            framework first generates an initial particle configuration through a decoupled planning and parameterization
+            pipeline, and then iteratively improves the result based on rendered feedback. To support precise and
+            targeted adjustments, we further introduce a diagnostic mechanism that links observed visual artifacts to
+            their underlying procedural causes. We validate our approach in Unreal Engine 5's Niagara system across a
+            diverse set of scenarios, including elemental spells, dynamic natural phenomena, and fireworks. Quantitative
+            and qualitative evaluations show that our method achieves high semantic fidelity and visual quality. By
+            directly synthesizing structured particle simulation logic, our framework reduces the technical barrier to
+            particle effect authoring and improves the efficiency of creative iteration.
           </p>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<section class="section" id="video">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
+    <div class="columns is-centered has-text-centered" id="video">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Video</h2>
-        <div class="video-carousel-wrapper">
-          <button class="video-carousel-btn video-carousel-prev" aria-label="Previous video">&#10094;</button>
-          <div class="video-carousel-viewport">
-            <div class="video-carousel-track" id="video-track"></div>
-          </div>
-          <button class="video-carousel-btn video-carousel-next" aria-label="Next video">&#10095;</button>
+        <div class="publication-video">
+          <video src="./static/demo.mp4" controls preload="metadata" playsinline></video>
         </div>
-
       </div>
     </div>
-  </div>
-</section>
 
-<section class="section" id="pipeline">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered">
+    <div class="columns is-centered" id="pipeline">
       <div class="column is-full-width">
         <h2 class="title is-3">Pipeline</h2>
         <div class="content has-text-justified">
           <p>
-            Overview of <span class="dnerf">ParticleGen</span>. Given a natural language description, a material library, and Niagara technical knowledge, the Planner agent constructs the emitter-level structure. Generator agents then perform behavioral parameterization in parallel. The generated specification is translated into native particle assets, rendered, and refined through Critic and Refiner agents with Diagnostic Retrieval-Augmented Generation and selective rollback.
+            Overview of our multi-agent framework for text-driven particle effect generation. Input and knowledge
+            grounding serve as the foundation, combining the user's natural language description <em>D</em>, a
+            pre-authored material library <em>M</em> with text descriptions, and domain-specific technical knowledge.
+            Driven by these grounded inputs, the generative pipeline proceeds through two primary phases. In initial
+            generation, a Planner agent first creates a structured schema <em>S</em><sup>0</sup>, followed by multiple
+            Generator agents that perform behavioral parameterization in parallel. In iterative refinement, a closed-loop
+            execution evaluates the rendered video with a Critic agent, while a Refiner agent performs automated
+            diagnosis and patches the parameters until high-quality effects are achieved or the maximum iteration limit
+            is reached.
           </p>
           <figure class="image">
             <img src="./static/images/pipeline.png" alt="ParticleGen pipeline">
@@ -122,7 +161,9 @@
         <h2 class="title is-3">Results</h2>
         <div class="content has-text-justified">
           <p>
-            We evaluate <span class="dnerf">ParticleGen</span> on 75 natural language prompts covering combat skill effects, weather phenomena, fireworks, and abstract magical effects. The full iterative pipeline achieves the best semantic alignment and visual aesthetics in automated and user evaluations.
+            We evaluate <span class="dnerf">ParticleGen</span> on 75 natural language prompts covering combat skill effects,
+            weather phenomena, fireworks, and abstract magical effects. The full iterative pipeline achieves the best
+            semantic alignment and visual aesthetics in automated and user evaluations.
           </p>
           <table>
             <thead>
@@ -155,29 +196,13 @@
   </div>
 </section>
 
-<section class="section" id="code">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3">Code</h2>
-    <div class="code-window">
-      <div class="code-titlebar">
-        <div class="code-dots">
-          <span class="code-dot code-dot-red"></span>
-          <span class="code-dot code-dot-yellow"></span>
-          <span class="code-dot code-dot-green"></span>
-        </div>
-        <span class="code-filename"> </span>
-      </div>
-      <div class="code-body" id="code-output"></div>
-    </div>
-    <script id="code-source" type="text/plain"># coming soon</script>
-  </div>
-</section>
-
 <section class="section" id="bibtex">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <p>If you find this project helpful to your research, please consider citing the public version after release:</p>
-<pre><code>@article{particlegen2026,
+    <p>
+      If you find this project helpful to your research, please consider citing the public version after release:
+    </p>
+    <pre><code>@article{particlegen2026,
   title   = {ParticleGen: A Multi-Agent System for Particle Effects Generation},
   author  = {Authors},
   year    = {2026}
@@ -191,7 +216,8 @@
       <div class="column is-8">
         <div class="content">
           <p>
-            This website follows the common Nerfies-style academic project page layout used by many graphics and vision papers.
+            This website follows the common Nerfies-style academic project page layout used by many graphics and vision
+            papers.
           </p>
         </div>
       </div>
@@ -199,117 +225,7 @@
   </div>
 </footer>
 
-<script src="./static/js/video-data.js"></script>
-<script>
-(function () {
-  var VIDEO_BASE = './static/videos/';
-
-  var track = document.getElementById('video-track');
-  var prevBtn = document.querySelector('.video-carousel-prev');
-  var nextBtn = document.querySelector('.video-carousel-next');
-  var current = 0;
-  var total = VIDEO_DATA.length;
-
-  function buildSlides() {
-    var html = '';
-    for (var i = 0; i < total; i++) {
-      var d = VIDEO_DATA[i];
-      html += '<div class="video-carousel-slide">' +
-        '<div class="video-card">' +
-        '<video controls playsinline muted preload="metadata">' +
-        '<source src="' + VIDEO_BASE + d.n + '/' + d.f + '.mp4" type="video/mp4">' +
-        '</video>' +
-        '<div class="video-prompt-box">' +
-        '<div class="video-prompt-label">Prompt</div>' +
-        '<div class="video-prompt-text">' + d.t + '</div>' +
-        '</div></div></div>';
-    }
-    track.innerHTML = html;
-  }
-
-  function goTo(index) {
-    if (index < 0) index = total - 1;
-    if (index >= total) index = 0;
-    current = index;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    pauseAllExceptCurrent();
-  }
-
-  function pauseAllExceptCurrent() {
-    var slides = track.querySelectorAll('.video-carousel-slide');
-    slides.forEach(function (slide, i) {
-      var video = slide.querySelector('video');
-      if (!video) return;
-      if (i !== current) {
-        video.pause();
-      }
-    });
-  }
-
-  prevBtn.addEventListener('click', function () { goTo(current - 1); });
-  nextBtn.addEventListener('click', function () { goTo(current + 1); });
-
-  buildSlides();
-})();
-</script>
-
-<script>
-(function () {
-  var PY_KW = ['False','None','True','and','as','assert','async','await','break','class','continue','def','del','elif','else','except','finally','for','from','global','if','import','in','is','lambda','nonlocal','not','or','pass','raise','return','try','while','with','yield'];
-
-  function escapeHtml(s) {
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
-
-  function highlightLine(line) {
-    if (!line.trim()) return '';
-    var tokens = [];
-    var i = 0;
-    while (i < line.length) {
-      if (line[i] === '#') {
-        tokens.push({t:'cmt', v:line.slice(i)});
-        i = line.length;
-      } else if (line[i] === '"' || line[i] === "'") {
-        var q = line[i], triple = line.slice(i, i+3) === q+q+q, j = i;
-        if (triple) { j += 3; while (j < line.length && line.slice(j, j+3) !== q+q+q) j++; j += 3; }
-        else { j++; while (j < line.length && line[j] !== q) { if (line[j] === '\\') j++; j++; } j++; }
-        tokens.push({t:'str', v:line.slice(i, j)}); i = j;
-      } else if (line[i] === '@' && (i === 0 || /[\s]/.test(line[i-1]))) {
-        var m = line.slice(i).match(/^@\w+/); if (m) { tokens.push({t:'dec', v:m[0]}); i += m[0].length; continue; }
-        tokens.push({t:'', v:line[i]}); i++;
-      } else if (/[a-zA-Z_]/.test(line[i])) {
-        var m = line.slice(i).match(/^[a-zA-Z_]\w*/); var w = m[0];
-        if (w.slice(0,2) === '__' && w.slice(-2) === '__') tokens.push({t:'var', v:w});
-        else if (PY_KW.indexOf(w) !== -1) tokens.push({t:'kw', v:w});
-        else if (i + w.length < line.length && line[i + w.length] === '(') tokens.push({t:'fn', v:w});
-        else tokens.push({t:'', v:w});
-        i += w.length;
-      } else {
-        tokens.push({t:'', v:line[i]}); i++;
-      }
-    }
-    return tokens.map(function(tk) {
-      var e = escapeHtml(tk.v);
-      return tk.t ? '<span class="py-' + tk.t + '">' + e + '</span>' : e;
-    }).join('');
-  }
-
-  function renderCode() {
-    var src = document.getElementById('code-source');
-    var out = document.getElementById('code-output');
-    if (!src || !out) return;
-    var lines = src.textContent.split('\n');
-    var html = '<table class="code-table"><tbody>';
-    for (var n = 0; n < lines.length; n++) {
-      html += '<tr><td class="code-linenum">' + (n + 1) + '</td><td class="code-line">' + highlightLine(lines[n]) + '</td></tr>';
-    }
-    html += '</tbody></table>';
-    out.innerHTML = html;
-  }
-
-  renderCode();
-})();
-</script>
+<script src="./static/js/video-showcase.js"></script>
 
 </body>
 </html>
