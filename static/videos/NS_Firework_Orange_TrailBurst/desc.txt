@@ -1,0 +1,1 @@
+This fireworks effect begins with an orange light blob shooting straight upward quickly. When its momentum is near zero, it explodes into a dense burst. Many smaller light blobs blast outward from the center, forming a sphere and leaving bright orange trails as they fall in arcing paths. As they descend, these trailing blobs gradually dim, break apart, and fade away completely.

@@ -1,0 +1,1 @@
+This is a looping effect that a single flame and smoke explosion forms a distinct ring shape around a central axis, and importantly, the ring is parallel to the ground (horizontal plane). The ring itself consists of smoke from the explosion, and flames appear randomly inside the ring rather than at fixed positions.

@@ -1,1 +1,0 @@
-Glittering orange blob continuously generated from a ground ring, floating upward and rotate around the ring axis.

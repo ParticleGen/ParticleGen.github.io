@@ -1,0 +1,1 @@
+This is a flame and smoke explosion that forms a distinct ring shape around a central axis. The ring is parallel to the ground.
