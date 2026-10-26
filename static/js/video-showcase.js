@@ -240,12 +240,12 @@
     var text = document.createElement("p");
 
     article.className = "video-showcase-card";
-    video.src = effect.video;
-    video.autoplay = true;
+    video.dataset.src = effect.video;
     video.muted = true;
+    video.setAttribute("muted", "");
     video.loop = true;
     video.playsInline = true;
-    video.preload = "auto";
+    video.preload = "none";
     video.setAttribute("aria-label", "Generated particle effect video");
 
     copy.className = "video-showcase-copy";
@@ -256,21 +256,6 @@
     article.appendChild(copy);
 
     return article;
-  }
-
-  function playVideo(video) {
-    video.load();
-    var playRequest = video.play();
-
-    if (playRequest && typeof playRequest.catch === "function") {
-      playRequest.catch(function () {});
-    }
-  }
-
-  function preloadVideos(videos) {
-    videos.forEach(function (video) {
-      playVideo(video);
-    });
   }
 
   function cloneTracks(tracks) {
@@ -284,6 +269,7 @@
   }
 
   var tracks = showcase.querySelectorAll(".video-showcase-track");
+  var rails = showcase.querySelectorAll(".video-showcase-rail");
   var perRail = Math.ceil(effects.length / tracks.length);
 
   effects.forEach(function (effect, index) {
@@ -292,6 +278,171 @@
     track.appendChild(createCard(effect));
   });
 
+  var originalCounts = Array.prototype.map.call(tracks, function (track) {
+    return track.children.length;
+  });
   cloneTracks(tracks);
-  preloadVideos(showcase.querySelectorAll("video"));
+
+  var videos = showcase.querySelectorAll("video");
+  var visibleVideos = new Set();
+  function startVideo(video) {
+    var playRequest = video.play();
+    if (playRequest && typeof playRequest.catch === "function") {
+      playRequest.catch(function () {});
+    }
+  }
+
+  var showcaseNearViewport = false;
+  var sourceObservers = Array.prototype.map.call(rails, function (rail) {
+    return new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting || !showcaseNearViewport) return;
+        var video = entry.target;
+        video.preload = "metadata";
+        video.src = video.dataset.src;
+        if (visibleVideos.has(video) && !document.hidden) startVideo(video);
+        sourceObservers[Array.prototype.indexOf.call(rails, rail)].unobserve(video);
+      });
+    }, { root: rail, rootMargin: "0px 360px" });
+  });
+
+  var playObserver = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var video = entry.target;
+      if (entry.isIntersecting) visibleVideos.add(video);
+      else visibleVideos.delete(video);
+      if (entry.isIntersecting && !document.hidden && video.src) {
+        startVideo(video);
+      } else {
+        video.pause();
+      }
+    });
+  }, { threshold: 0.25 });
+
+  videos.forEach(function (video) {
+    playObserver.observe(video);
+  });
+
+  document.addEventListener("visibilitychange", function () {
+    videos.forEach(function (video) {
+      if (document.hidden || !visibleVideos.has(video)) video.pause();
+      else if (video.src) startVideo(video);
+    });
+  });
+
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var manualPauseUntil = 0;
+  var previousFrame = 0;
+  var directions = Array.prototype.map.call(rails, function (rail, index) {
+    return index === 1 ? -1 : 1;
+  });
+  var loopWidths = [];
+  var scrollPositions = Array.prototype.map.call(rails, function (rail) {
+    return rail.scrollLeft;
+  });
+  var showcaseObserver = new IntersectionObserver(function (entries) {
+    showcaseNearViewport = entries[0].isIntersecting;
+    videos.forEach(function (video) {
+      var railIndex = Array.prototype.indexOf.call(rails, video.closest(".video-showcase-rail"));
+      var sourceObserver = sourceObservers[railIndex];
+      if (showcaseNearViewport && !video.src) sourceObserver.observe(video);
+      else if (!showcaseNearViewport && !video.src) sourceObserver.unobserve(video);
+    });
+  }, { rootMargin: "350px 0px" });
+  showcaseObserver.observe(showcase);
+
+  function loopWidth(index) {
+    return tracks[index].children[originalCounts[index]].offsetLeft - tracks[index].children[0].offsetLeft;
+  }
+
+  function normalize(index) {
+    var width = loopWidths[index];
+    if (!width) return;
+    var rail = rails[index];
+    var position = scrollPositions[index];
+    if (directions[index] > 0 && position >= width) {
+      position %= width;
+    } else if (directions[index] < 0 && position <= 0) {
+      position = width - ((-position) % width);
+      if (position >= width) position = 0;
+    } else if (position > width) {
+      position %= width;
+    }
+    scrollPositions[index] = position;
+    rail.scrollLeft = position;
+  }
+
+  function pauseAfterInput(index) {
+    scrollPositions[index] = rails[index].scrollLeft;
+    manualPauseUntil = performance.now() + 2200;
+  }
+
+  rails.forEach(function (rail, index) {
+    rail.tabIndex = 0;
+    rail.addEventListener("wheel", function () { pauseAfterInput(index); }, { passive: true });
+    rail.addEventListener("touchstart", function () { pauseAfterInput(index); }, { passive: true });
+    rail.addEventListener("touchend", function () { pauseAfterInput(index); }, { passive: true });
+    rail.addEventListener("scroll", function () {
+      if (performance.now() < manualPauseUntil || drag) scrollPositions[index] = rail.scrollLeft;
+    }, { passive: true });
+    rail.addEventListener("keydown", function (event) {
+      if (["ArrowLeft", "ArrowRight", "Home", "End", "PageUp", "PageDown"].indexOf(event.key) !== -1) {
+        pauseAfterInput(index);
+      }
+    });
+
+    var drag = null;
+    rail.addEventListener("pointerdown", function (event) {
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      if (event.target.closest(".video-showcase-copy")) return;
+      drag = { id: event.pointerId, x: event.clientX, scrollLeft: rail.scrollLeft };
+      rail.classList.add("is-dragging");
+      rail.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+    rail.addEventListener("pointermove", function (event) {
+      if (drag && drag.id === event.pointerId) {
+        rail.scrollLeft = drag.scrollLeft - (event.clientX - drag.x);
+        scrollPositions[index] = rail.scrollLeft;
+      }
+    });
+    function endDrag(event) {
+      if (!drag || (event && drag.id !== event.pointerId)) return;
+      drag = null;
+      rail.classList.remove("is-dragging");
+      pauseAfterInput(index);
+    }
+    rail.addEventListener("pointerup", endDrag);
+    rail.addEventListener("pointercancel", endDrag);
+    rail.addEventListener("lostpointercapture", endDrag);
+  });
+
+  function animate(timestamp) {
+    if (document.hidden) {
+      previousFrame = 0;
+      requestAnimationFrame(animate);
+      return;
+    }
+
+    var delta = previousFrame ? Math.min((timestamp - previousFrame) / 1000, 0.05) : 0;
+    previousFrame = timestamp;
+    if (showcaseNearViewport && !reducedMotion.matches && timestamp >= manualPauseUntil) {
+      rails.forEach(function (rail, index) {
+        if (rail.matches(":hover") || rail.matches(":focus-within") || rail.classList.contains("is-dragging")) return;
+        scrollPositions[index] += directions[index] * 24 * delta;
+        normalize(index);
+      });
+    }
+    requestAnimationFrame(animate);
+  }
+
+  requestAnimationFrame(function () {
+    rails.forEach(function (_rail, index) {
+      loopWidths[index] = loopWidth(index);
+      if (directions[index] < 0) scrollPositions[index] = loopWidths[index];
+      else scrollPositions[index] = rails[index].scrollLeft;
+      rails[index].scrollLeft = scrollPositions[index];
+    });
+    requestAnimationFrame(animate);
+  });
 })();
