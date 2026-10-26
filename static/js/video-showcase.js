@@ -240,7 +240,8 @@
     var text = document.createElement("p");
 
     article.className = "video-showcase-card";
-    video.dataset.src = effect.video;
+    video.dataset.src = effect.video + "?v=720p30-crf28";
+    video.dataset.poster = "./static/posters/" + effect.name + ".jpg";
     video.muted = true;
     video.setAttribute("muted", "");
     video.loop = true;
@@ -296,9 +297,10 @@
   var sourceObservers = Array.prototype.map.call(rails, function (rail) {
     return new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting || !showcaseNearViewport) return;
+        if (!entry.isIntersecting || !showcaseNearViewport || document.hidden) return;
         var video = entry.target;
         video.preload = "metadata";
+        video.poster = video.dataset.poster;
         video.src = video.dataset.src;
         if (visibleVideos.has(video) && !document.hidden) startVideo(video);
         sourceObservers[Array.prototype.indexOf.call(rails, rail)].unobserve(video);
@@ -325,8 +327,20 @@
 
   document.addEventListener("visibilitychange", function () {
     videos.forEach(function (video) {
-      if (document.hidden || !visibleVideos.has(video)) video.pause();
-      else if (video.src) startVideo(video);
+      if (document.hidden) {
+        video.pause();
+        if (!video.src) {
+          var railIndex = Array.prototype.indexOf.call(rails, video.closest(".video-showcase-rail"));
+          sourceObservers[railIndex].unobserve(video);
+        }
+      } else {
+        if (showcaseNearViewport && !video.src) {
+          var visibleRailIndex = Array.prototype.indexOf.call(rails, video.closest(".video-showcase-rail"));
+          sourceObservers[visibleRailIndex].observe(video);
+        }
+        if (!visibleVideos.has(video)) video.pause();
+        else if (video.src) startVideo(video);
+      }
     });
   });
 
