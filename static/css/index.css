@@ -347,8 +347,18 @@ img {
 }
 
 .video-showcase-rail {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding: 0.15rem 0;
+  cursor: grab;
+  scrollbar-width: thin;
+  scrollbar-color: #aab3c0 transparent;
+  overscroll-behavior-x: contain;
+}
+
+.video-showcase-rail.is-dragging {
+  cursor: grabbing;
+  user-select: none;
 }
 
 .video-showcase-rail + .video-showcase-rail {
@@ -359,18 +369,6 @@ img {
   display: flex;
   width: max-content;
   gap: 1rem;
-  animation: video-showcase-flow 56s linear infinite;
-  will-change: transform;
-}
-
-.video-showcase-rail-alt .video-showcase-track {
-  animation-direction: reverse;
-  animation-duration: 64s;
-}
-
-.video-showcase-rail:hover .video-showcase-track,
-.video-showcase-rail:focus-within .video-showcase-track {
-  animation-play-state: paused;
 }
 
 .video-showcase-card {
@@ -403,16 +401,6 @@ img {
   font-size: 0.93rem;
   line-height: 1.5;
   white-space: pre-wrap;
-}
-
-@keyframes video-showcase-flow {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(calc(-50% - 0.5rem));
-  }
 }
 
 .section {
@@ -634,16 +622,5 @@ code {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .video-showcase-rail {
-    overflow-x: auto;
-  }
-
-  .video-showcase-track {
-    animation: none;
-    scroll-snap-type: x mandatory;
-  }
-
-  .video-showcase-card {
-    scroll-snap-align: start;
-  }
+  .video-showcase-rail { scroll-behavior: auto; }
 }
