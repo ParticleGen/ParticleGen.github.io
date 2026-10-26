@@ -408,11 +408,37 @@ img {
 }
 
 #abstract .columns + .columns {
-  margin-top: 3.25rem;
+  margin-top: 2rem;
 }
 
 #pipeline .content p {
-  margin-bottom: 1.35rem;
+  margin-bottom: 0.5rem;
+}
+
+#abstract {
+  padding-bottom: 1.5rem;
+}
+
+#results {
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+}
+
+#pipeline figure.image,
+#results figure.image {
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+/* Trim only the source figures' white borders without changing the images. */
+#pipeline .image img {
+  margin-top: -5.5%;
+  margin-bottom: -7.1%;
+}
+
+#results .image img {
+  margin-top: -2.2%;
+  margin-bottom: -12.2%;
 }
 
 .content {
@@ -612,7 +638,7 @@ code {
   }
 
   #abstract .columns + .columns {
-    margin-top: 2.5rem;
+    margin-top: 1.5rem;
   }
 
   .content table {
